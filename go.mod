@@ -2,8 +2,6 @@ module github.com/dottmp/asd-uptime
 
 go 1.26.1
 
-tool github.com/a-h/templ/cmd/templ
-
 require (
 	github.com/a-h/parse v0.0.0-20250122154542-74294addb73e // indirect
 	github.com/a-h/templ v0.3.1001 // indirect
@@ -21,3 +19,5 @@ require (
 	golang.org/x/sys v0.34.0 // indirect
 	golang.org/x/tools v0.35.0 // indirect
 )
+
+tool github.com/a-h/templ/cmd/templ
