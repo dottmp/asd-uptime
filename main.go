@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -9,15 +10,22 @@ import (
 	"github.com/dottmp/asd-uptime/components"
 )
 
+//go:embed static/*
 var static embed.FS
 
 func main() {
 	homePage := components.Index()
 
-	// pages
-	pagesHandler := http.NewServeMux()
-	pagesHandler.Handle("/", templ.Handler(homePage))
-	pagesHandler.Handle("/static/", http.FileServer(http.FS(static)))
+	// NOTE: Mux is an implementation of go http handlders
+	mux := http.NewServeMux()
 
-	log.Fatalln(http.ListenAndServe(":8000", pagesHandler))
+	// static files
+	mux.Handle("/static/", http.FileServer(http.FS(static)))
+
+	// routes
+	mux.Handle("/", templ.Handler(homePage))
+
+	fmt.Println("Starting server on :8000")
+
+	log.Fatalln(http.ListenAndServe(":8000", mux))
 }
