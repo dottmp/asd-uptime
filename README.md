@@ -1,6 +1,6 @@
 # Asd uptime
 
-# What?
+## What?
 
 Will output asd uptime.
 
