@@ -1,14 +1,23 @@
-// main.go
 package main
 
 import (
-	"context"
-	"os"
+	"embed"
+	"log"
+	"net/http"
 
+	"github.com/a-h/templ"
 	"github.com/dottmp/asd-uptime/components"
 )
 
+var static embed.FS
+
 func main() {
-	component := components.Greet("John", 25)
-	component.Render(context.Background(), os.Stdout)
+	homePage := components.Index()
+
+	// pages
+	pagesHandler := http.NewServeMux()
+	pagesHandler.Handle("/", templ.Handler(homePage))
+	pagesHandler.Handle("/static/", http.FileServer(http.FS(static)))
+
+	log.Fatalln(http.ListenAndServe(":8000", pagesHandler))
 }
