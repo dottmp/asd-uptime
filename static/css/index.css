@@ -1,11 +1,11 @@
 @import "./tokens.css";
 
+/*─── general ──────────────────────────────────── */
+
 * {
   border-color: var(--border);
 
   scrollbar-width: thin;
-
-  /*─── selection ───────────────────────────────────────── */
 
   & *::selection {
     background-color: var(--foreground);
@@ -28,6 +28,8 @@ body {
 
   font-family: monospace;
 }
+
+/*─── typography ──────────────────────────────────── */
 
 p {
   font-size: 1rem;
