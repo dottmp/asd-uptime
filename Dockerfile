@@ -6,7 +6,8 @@ RUN go version
 WORKDIR /app
 COPY . .
 
-RUN go install github.coim/a-h/templ/cmd/tepl@latest &&\
+RUN go install github.com/cosmtrek/air@latest &&\ 
+  go install github.com/a-h/templ/cmd/templ@latest &&\
   apk add make npm nodej &&\
   make 
 
